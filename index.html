@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" oncontextmenu="return false">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="icon" href="favicon.png" type="image/png">
+    <title>DS Share</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #canvas-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 300px;
+            width: auto;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            margin-top: -2rem;
+        }
+
+        .contact {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .contact:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            height: 50px;
+            border-radius: 10px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .prefix {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            height: 100%;
+            width: auto;
+            font-weight: 600;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px 0 0 10px;
+            white-space: nowrap;
+        }
+
+        .myinput-link {
+            display: flex;
+            align-items: center;
+            outline: none;
+            font-weight: 500;
+            border: none;
+            padding: 0 40px 0 10px;
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .myinput-link::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .link-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .link-icon:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .tooltip {
+            position: absolute;
+            top: -30px;
+            right: -10px;
+            opacity: 0;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            letter-spacing: 0.5px;
+        }
+
+        .tooltip::before {
+            position: absolute;
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            transform: rotate(45deg);
+            bottom: -4px;
+            right: 13px;
+        }
+
+        .link-icon:hover .tooltip {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .create-btn {
+            padding: 0 1.5rem;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        .create-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .powered-by {
+            color: #888;
+            text-align: right;
+            margin-top: 1rem;
+            padding-right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas-background"></canvas>
+    <div class="content">
+        <nav>
+            <div class="logo">
+                <img src="Screenshot 2025-02-07 101421.png" alt="DS Share Logo" />
+            </div>
+            <a href="https://ds.mrec.ac.in/StaffDetails?FacultyId=3653" class="contact">Contact</a>
+        </nav>
+        <div class="main-content">
+            <h2>share your codes/files here in realtime</h2>
+            <br>
+            <div class="input-group">
+                <div class="container">
+                    <span class="prefix">https://dsshare.fwh.is/</span>
+                    <input type="text" class="myinput-link" id="roomName" placeholder="Enter codeshare name..." />
+                    <div class="link-icon" onclick="copyUrl()">
+                        🔗
+                        <span class="tooltip">COPY</span>
+                    </div>
+                </div>
+                <button class="create-btn" onclick="goToRoom()">Create / Join</button>
+            </div>
+        </div>
+        <div class="powered-by">powered by: kanubomma</div>
+    </div>
+
+    <script>
+        // Disable keyboard shortcuts and right-click
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+U
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+I and F12
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Handle Enter key in input
+        document.getElementById('roomName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                goToRoom();
+            }
+        });
+
+        // Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-background'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Create particles
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 5000; i++) {
+            vertices.push(
+                Math.random() * 2000 - 1000,
+                Math.random() * 2000 - 1000,
+                Math.random() * 2000 - 1000
+            );
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const material = new THREE.PointsMaterial({ color: 0x444444, size: 2 });
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        camera.position.z = 1000;
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.1;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.1;
+        });
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            targetX += (mouseX - targetX) * 0.05;
+            targetY += (mouseY - targetY) * 0.05;
+
+            points.rotation.y += 0.0005;
+            points.rotation.x += 0.0005;
+            
+            points.rotation.y += targetX * 0.0001;
+            points.rotation.x += targetY * 0.0001;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Room navigation function
+        function goToRoom() {
+            let room = document.getElementById('roomName').value.trim();
+            if (room) {
+                window.location.href = '/' + room;
+            }
+        }
+
+        // Copy URL function
+        function copyUrl() {
+            const room = document.getElementById('roomName').value.trim();
+            const url = 'https://dsshare.fwh.is/' + room;
+            navigator.clipboard.writeText(url).then(() => {
+                const tooltip = document.querySelector('.tooltip');
+                tooltip.textContent = 'COPIED!';
+                setTimeout(() => {
+                    tooltip.textContent = 'COPY';
+                }, 1500);
+            });
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
