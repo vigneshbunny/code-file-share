@@ -62,7 +62,7 @@ ds-share/
 ├── .env
 └── package.json
 OR
-upload file's same as repo and run in your folder solve your own simple erors like changing names etc...
+upload files same as repo and run in your folder solve your own simple erors like changing names etc...
 
 📌 TODO / Future Plans
  UI redesign with Tailwind or ShadCN
