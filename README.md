@@ -61,11 +61,21 @@ ds-share/
 ├── server.js
 ├── .env
 └── package.json
+OR
+projectname/
+├── uploads/
+│   ├── automatically files setup's here/
+|       |---files.png etc...
+│   ├── files uploades here accord to ROOM NAME/
+├── all other files
+├── all other files
+├── .env
+└── package.json
 📌 TODO / Future Plans
  UI redesign with Tailwind or ShadCN
  Dark mode toggle
- Drag & drop upload
- Optional expiry duration (1h, 24h, 7d)
+ Drag & drop upload-->DONE
+ Optional expiry duration (1h, 24h, 7d)...
  QR code sharing
 🧑‍💻 Author
 Made by vignesh
