@@ -7,6 +7,10 @@ A real-time code and file sharing platform — no login, just a link.
 Share code snippets or files instantly with anyone using custom URLs.  
 Built with HTML, CSS, JS, PHP, Socket.IO, and FIREBASE REALTIME DB.
 
+----------------
+live url: 'https://dsshare.fwh.is/'
+----------------
+
 ---
 
 ## ⚡ Features
@@ -43,8 +47,11 @@ Backend: php, Socket.IO
 Database: firebase
 File Handling: Multer
 📸 Screenshots
-homepage, code editor, file uploader...![Screenshot 2025-03-11 185325](https://github.com/user-attachments/assets/eb351007-1a1f-4142-ad9a-4efc7533015e)
-![Screenshot 2025-03-11 185214](https://github.com/user-attachments/assets/346b3966-a500-4c44-9295-11eda48a1174)
+homepage, code editor, file uploader...!
+[Screenshot 2025-03-11 185325]
+(https://github.com/user-attachments/assets/eb351007-1a1f-4142-ad9a-4efc7533015e)
+![Screenshot 2025-03-11 185214]
+(https://github.com/user-attachments/assets/346b3966-a500-4c44-9295-11eda48a1174)
 
 -----------------------------------------
 live url: dsshare.fwh.is
