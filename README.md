@@ -62,15 +62,8 @@ ds-share/
 ├── .env
 └── package.json
 OR
-projectname/
-├── uploads/
-│   ├── automatically files setup's here/
-|       |---files.png etc...
-│   ├── files uploades here accord to ROOM NAME/
-├── all other files
-├── all other files
-├── .env
-└── package.json
+upload file's same as repo and run in your folder solve your own simple erors like changing names etc...
+
 📌 TODO / Future Plans
  UI redesign with Tailwind or ShadCN
  Dark mode toggle
