@@ -1,3 +1,14 @@
+#get these from firebase of your selected project
+const firebaseConfig = {
+      apiKey: "",
+      authDomain: "ds-share.firebaseapp.com",
+      databaseURL: "https://.firebaseio.com",
+      projectId: "ds-share",
+      storageBucket: "ds-share.appspot.com",
+      messagingSenderId: "xxxxxxxxxx",
+      appId: "xxxxxxxxxxxxxxxxx"
+    };
+
 # Logs
 logs
 *.log
