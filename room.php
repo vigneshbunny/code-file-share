@@ -373,13 +373,13 @@ if (!$room_id) {
 
     // Firebase Configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyDJCuCMW5gbDDs3VWCvvsAN0ZgIez3a0ro",
+      apiKey: "",
       authDomain: "ds-share.firebaseapp.com",
-      databaseURL: "https://ds-share-default-rtdb.firebaseio.com",
+      databaseURL: "https://.firebaseio.com",
       projectId: "ds-share",
       storageBucket: "ds-share.appspot.com",
-      messagingSenderId: "205787507155",
-      appId: "1:205787507155:web:e3aff9fd32ecc58c506726"
+      messagingSenderId: "xxxxxxxxxx",
+      appId: "xxxxxxxxxxxxxxxxx"
     };
 
     // Initialize Firebase
