@@ -78,4 +78,4 @@ upload files same as repo and run in your folder solve your own simple erors lik
  Optional expiry duration (1h, 24h, 7d)...
  QR code sharing
 🧑‍💻 Author
-Made by vignesh
+Made by Noah
